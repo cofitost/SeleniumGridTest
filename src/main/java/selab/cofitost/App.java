@@ -2,34 +2,39 @@ package selab.cofitost;
 
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.Platform;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 /**
  * Hello world!
  *
  */
-public class App 
-{
-    Capabilities chromeCapabilities = DesiredCapabilities.chrome();
-    Capabilities firefoxCapabilities = DesiredCapabilities.firefox();
+public class App {
+    // Capabilities chromeCapabilities = DesiredCapabilities.chrome();
+    // Capabilities firefoxCapabilities = DesiredCapabilities.firefox();
 
-    public static void main( String[] args )
-    {
-        RemoteWebDriver chrome = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromeCapabilities);
-        RemoteWebDriver firefox = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), firefoxCapabilities);
+    // DesiredCapabilities caps = new DesiredCapabilities();
+
+    public static void main(String[] args) {
+        DesiredCapabilities chromeCaps = new DesiredCapabilities();
+        chromeCaps.setBrowserName("chrome");
+
+        RemoteWebDriver chrome;
+        RemoteWebDriver firefox;
+        try {
+            chrome = new RemoteWebDriver(new URL("http://140.134.26.76:38200/wd/hub"), chromeCaps);
+            chrome.get("https://www.google.com");
+            System.out.println(chrome.getTitle());
+            chrome.quit();
     
-        // run against chrome
-        chrome.get("https://www.google.com");
-        System.out.println(chrome.getTitle());
-    
-        // run against firefox
-        firefox.get("https://www.google.com");
-        System.out.println(firefox.getTitle());
-      
-        chrome.quit();
-        firefox.quit();
+        } catch (MalformedURLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 }
