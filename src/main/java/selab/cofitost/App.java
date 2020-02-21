@@ -21,13 +21,12 @@ public class App {
     // DesiredCapabilities caps = new DesiredCapabilities();
 
     public static void main(String[] args) {
-        DesiredCapabilities chromeCaps = new DesiredCapabilities();
-        chromeCaps.setBrowserName("chrome");
+        DesiredCapabilities chromeCaps = DesiredCapabilities.chrome();
+        // chromeCaps.setBrowserName("chrome");
 
         RemoteWebDriver chrome;
-        RemoteWebDriver firefox;
         try {
-            chrome = new RemoteWebDriver(new URL("http://140.134.26.76:38200/wd/hub"), chromeCaps);
+            chrome = new RemoteWebDriver(new URL("http://140.134.26.76:38101/wd/hub"), chromeCaps);
             chrome.get("https://www.google.com");
             System.out.println(chrome.getTitle());
             chrome.quit();
